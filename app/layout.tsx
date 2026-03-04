@@ -1,12 +1,30 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Merriweather } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const merriweather = Merriweather({
+  weight: ["300", "400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-merriweather",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Coming Soon",
-  description: "Our website is coming soon. Stay tuned!",
+  title: "LAAPS Institute - Applied Analysis for Practical Solutions",
+  description:
+    "LAAPS Institute is a multidisciplinary research and advisory institute in the Horn of Africa, generating high-quality evidence to inform policy and support effective solutions for development, humanitarian, and governance interventions.",
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -16,7 +34,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <link rel="icon" type="image/png" href="/logo.png" />
+      </head>
+      <body className={`${inter.variable} ${merriweather.variable}`}>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+        {children}
+      </body>
     </html>
   );
 }
