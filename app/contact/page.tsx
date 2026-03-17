@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import SecondHeader from "../components/SecondHeader";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -50,54 +51,7 @@ export default function ContactPage() {
   return (
     <div className="wireframe-container">
       {/* Header */}
-      <header className="header-bar">
-        <div
-          className="container"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: 0,
-          }}
-        >
-          <div className="logo-area">
-            <a
-              href="/"
-              style={{
-                textDecoration: "none",
-                display: "flex",
-                alignItems: "center",
-                gap: "1rem",
-              }}
-            >
-              <img
-                src="/logo.png"
-                alt="LAAPS Logo"
-                style={{ height: "50px", width: "auto" }}
-              />
-              <div>
-                <h1>
-                  LAAPS <span style={{ fontWeight: 300 }}>Institute</span>
-                </h1>
-                <div className="logo-tag">
-                  applied analysis · practical solutions
-                </div>
-              </div>
-            </a>
-          </div>
-          <nav className="nav-links">
-            <a href="/">Home</a>
-            <a href="/#about">About</a>
-            <a href="/#research">Research</a>
-            <a href="/#advisory">Advisory</a>
-            <a href="/services">Services</a>
-            <a href="/projects">Projects</a>
-            <a href="/contact" className="cta-button">
-              Contact Us
-            </a>
-          </nav>
-        </div>
-      </header>
+      <SecondHeader />
 
       {/* Hero Section */}
       <section className="hero" style={{ padding: "5rem 2.5rem" }}>

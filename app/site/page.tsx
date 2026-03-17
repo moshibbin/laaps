@@ -74,7 +74,7 @@ export default function Page() {
             </div>
           </div>
           <nav className="nav-links">
-            <a href="#home">Home</a>
+            <a href="/site">Home</a>
             <a href="#about">About</a>
             <a href="#research">Research</a>
             <a href="/consultancy">Advisory</a>

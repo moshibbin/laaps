@@ -1,0 +1,1299 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+
+interface Research {
+  id: string;
+  title: string;
+  authors: string;
+  abstract: string;
+  date: string;
+  category: string;
+  pdfUrl?: string;
+  status: "draft" | "published";
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface Author {
+  id?: string;
+  name: string;
+  email: string;
+  bio?: string;
+  expertise?: string[];
+  profileImage?: string;
+  publications?: number;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export default function AdminDashboard() {
+  const [research, setResearch] = useState<Research[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<
+    "dashboard" | "publications" | "authors" | "analytics" | "settings"
+  >("dashboard");
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showMobileSidebar, setShowMobileSidebar] = useState(false);
+  const router = useRouter();
+
+  const [formData, setFormData] = useState({
+    title: "",
+    authors: "",
+    abstract: "",
+    date: "",
+    category: "",
+    pdfUrl: "",
+    status: "draft" as "draft" | "published",
+  });
+
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem("isAdminAuthenticated");
+    if (!isAuthenticated) {
+      router.push("/admin/login");
+      return;
+    }
+    fetchResearch();
+  }, [router]);
+
+  const fetchResearch = async () => {
+    try {
+      const res = await fetch("/api/research");
+      const data = await res.json();
+      setResearch(data);
+    } catch (error) {
+      console.error("Failed to fetch research:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("isAdminAuthenticated");
+    router.push("/admin/login");
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      if (editingId) {
+        await fetch("/api/research", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id: editingId, ...formData }),
+        });
+      } else {
+        await fetch("/api/research", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+      }
+
+      resetForm();
+      fetchResearch();
+      setShowAddModal(false);
+    } catch (error) {
+      console.error("Failed to save research:", error);
+    }
+  };
+
+  const handleEdit = (item: Research) => {
+    setFormData({
+      title: item.title,
+      authors: item.authors,
+      abstract: item.abstract,
+      date: item.date,
+      category: item.category,
+      pdfUrl: item.pdfUrl || "",
+      status: item.status,
+    });
+    setEditingId(item.id);
+    setShowAddModal(true);
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this research?")) return;
+
+    try {
+      await fetch(`/api/research?id=${id}`, { method: "DELETE" });
+      fetchResearch();
+    } catch (error) {
+      console.error("Failed to delete research:", error);
+    }
+  };
+
+  const resetForm = () => {
+    setFormData({
+      title: "",
+      authors: "",
+      abstract: "",
+      date: "",
+      category: "",
+      pdfUrl: "",
+      status: "draft",
+    });
+    setEditingId(null);
+  };
+
+  const publishedCount = research.filter(
+    (r) => r.status === "published",
+  ).length;
+  const draftCount = research.filter((r) => r.status === "draft").length;
+
+  return (
+    <>
+      <style jsx global>{`
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+          font-family:
+            "Inter",
+            -apple-system,
+            system-ui,
+            sans-serif;
+          background: #f4f6fb;
+          display: flex;
+          min-height: 100vh;
+          color: #1e293b;
+        }
+
+        /* ----- SIDEBAR (admin navigation) ----- */
+        .sidebar {
+          width: 280px;
+          background: linear-gradient(180deg, #0b1e33 0%, #0b2b3f 100%);
+          color: #e0edff;
+          flex-direction: column;
+          box-shadow: 4px 0 20px rgba(0, 20, 40, 0.12);
+          position: fixed;
+          height: 100vh;
+          z-index: 100;
+          transition: transform 0.3s ease;
+          display: flex;
+        }
+
+        .sidebar-header {
+          padding: 2rem 1.5rem 1.5rem;
+          font-size: 1.6rem;
+          font-weight: 600;
+          letter-spacing: -0.3px;
+          border-bottom: 1px solid #2a4a6e;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .sidebar-header i {
+          color: #6ab0ff;
+          font-size: 1.9rem;
+        }
+
+        .sidebar-nav {
+          flex: 1;
+          padding: 2rem 0 0 1.2rem;
+        }
+
+        .nav-item {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding: 0.9rem 1.5rem;
+          margin: 0.3rem 1rem 0.3rem 0;
+          border-radius: 40px 0 0 40px;
+          color: #cbd5e1;
+          font-weight: 500;
+          transition: all 0.15s;
+          cursor: pointer;
+        }
+
+        .nav-item i {
+          width: 24px;
+          font-size: 1.25rem;
+          text-align: center;
+        }
+
+        .nav-item.active {
+          background: #f4f6fb;
+          color: #0b2a41;
+          box-shadow: -4px 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-item:not(.active):hover {
+          background: rgba(255, 255, 255, 0.06);
+          color: #ffffff;
+        }
+
+        .nav-item span {
+          font-size: 0.98rem;
+        }
+
+        /* footer sidebar (optional) */
+        .sidebar-footer {
+          padding: 2rem 1.5rem 2rem;
+          font-size: 0.85rem;
+          border-top: 1px solid #1f405d;
+          color: #9bb5d4;
+        }
+
+        /* ----- MAIN PANEL (dashboard + publications) ----- */
+        .main-panel {
+          margin-left: 280px;
+          min-height: 100vh;
+          width: calc(100vw - 280px);
+          display: flex;
+          flex-direction: column;
+          overflow-x: hidden;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+          display: none;
+          position: fixed;
+          top: 1rem;
+          left: 1rem;
+          z-index: 150;
+          background: #0b2e48;
+          color: white;
+          border: none;
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          cursor: pointer;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .mobile-sidebar-overlay {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.5);
+          z-index: 99;
+        }
+
+        /* header */
+        .top-header {
+          background: white;
+          padding: 1.2rem 2.2rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-bottom: 1px solid #e9eef3;
+          box-shadow: 0 2px 8px rgba(0, 20, 40, 0.02);
+          width: 100%;
+        }
+
+        .header-title h1 {
+          font-size: 1.7rem;
+          font-weight: 600;
+          color: #0e2c44;
+          letter-spacing: -0.02em;
+        }
+
+        .header-title p {
+          font-size: 0.9rem;
+          color: #64748b;
+          margin-top: 4px;
+        }
+
+        .admin-profile {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+
+        .notification-badge {
+          background: #f1f5f9;
+          padding: 8px 12px;
+          border-radius: 50px;
+          font-size: 1rem;
+          color: #2c3e50;
+          cursor: pointer;
+        }
+
+        .avatar {
+          background: #1d3a5c;
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-weight: 600;
+          font-size: 1.2rem;
+          cursor: pointer;
+        }
+
+        /* dashboard content */
+        .content {
+          padding: 2rem 2rem 1.5rem;
+          flex: 1;
+          overflow-y: auto;
+          width: 100%;
+          max-width: 100%;
+        }
+
+        /* metric cards */
+        .dashboard-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1.8rem;
+          margin-bottom: 2.5rem;
+          width: 100%;
+        }
+
+        .stat-card {
+          background: white;
+          border-radius: 28px;
+          padding: 1.6rem 1.5rem;
+          box-shadow: 0 12px 28px -8px rgba(0, 34, 64, 0.08);
+          transition: transform 0.15s;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border: 1px solid rgba(211, 226, 243, 0.4);
+        }
+
+        .stat-left h3 {
+          font-size: 2.1rem;
+          font-weight: 700;
+          color: #0b2a41;
+          line-height: 1.2;
+        }
+
+        .stat-left p {
+          color: #5f7d9c;
+          font-weight: 500;
+          font-size: 0.95rem;
+          text-transform: uppercase;
+          letter-spacing: 0.3px;
+        }
+
+        .stat-icon {
+          background: #ecf3fa;
+          width: 56px;
+          height: 56px;
+          border-radius: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #1d4e7c;
+          font-size: 1.9rem;
+        }
+
+        /* charts / mini overview (just for visual) */
+        .insight-row {
+          display: flex;
+          gap: 2rem;
+          margin-bottom: 2.5rem;
+          flex-wrap: wrap;
+          width: 100%;
+        }
+
+        .chart-card {
+          flex: 2;
+          min-width: 280px;
+          background: white;
+          border-radius: 28px;
+          padding: 1.5rem 1.8rem;
+          box-shadow: 0 8px 24px rgba(0, 32, 64, 0.04);
+          border: 1px solid #eaf0f6;
+        }
+
+        .chart-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1.2rem;
+        }
+
+        .chart-header h3 {
+          font-weight: 600;
+          font-size: 1.2rem;
+          color: #1e3a5f;
+        }
+
+        .badge-light {
+          background: #d9e9ff;
+          padding: 0.3rem 1rem;
+          border-radius: 40px;
+          font-size: 0.8rem;
+          color: #13548b;
+          font-weight: 600;
+        }
+
+        .mini-bars {
+          display: flex;
+          align-items: flex-end;
+          gap: 1rem;
+          height: 140px;
+          margin-top: 1.2rem;
+        }
+
+        .bar-container {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .bar {
+          width: 40px;
+          background: #407bff;
+          border-radius: 18px 18px 6px 6px;
+          transition: 0.2s;
+        }
+
+        .bar-label {
+          font-size: 0.8rem;
+          color: #62748c;
+          font-weight: 500;
+        }
+
+        .bar-1 {
+          height: 86px;
+          background: #2563eb;
+        }
+        .bar-2 {
+          height: 112px;
+          background: #1e6f9f;
+        }
+        .bar-3 {
+          height: 70px;
+          background: #2b6a95;
+        }
+        .bar-4 {
+          height: 130px;
+          background: #0f4c81;
+        }
+        .bar-5 {
+          height: 58px;
+          background: #3b82b6;
+        }
+
+        .recent-card {
+          flex: 1.2;
+          background: white;
+          border-radius: 28px;
+          padding: 1.5rem 1.8rem;
+          border: 1px solid #eaf0f6;
+        }
+
+        .recent-item {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding: 0.8rem 0;
+          border-bottom: 1px solid #eef3f8;
+        }
+        .recent-item:last-child {
+          border: none;
+        }
+        .recent-icon {
+          background: #e8f0fe;
+          width: 38px;
+          height: 38px;
+          border-radius: 14px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #1d4e7c;
+        }
+        .recent-detail {
+          font-weight: 500;
+          font-size: 0.95rem;
+        }
+        .recent-date {
+          font-size: 0.8rem;
+          color: #6f8faf;
+          margin-left: auto;
+        }
+
+        /* ----- RESEARCH PUBLICATIONS TABLE (admin section) ----- */
+        .publications-section {
+          background: white;
+          border-radius: 30px;
+          padding: 1.8rem 2rem;
+          box-shadow: 0 16px 30px -10px rgba(16, 42, 80, 0.1);
+          margin-top: 1.2rem;
+          border: 1px solid #e3ebf5;
+          width: 100%;
+        }
+
+        .section-title {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 1.8rem;
+          flex-wrap: wrap;
+          gap: 1rem;
+        }
+
+        .section-title h2 {
+          font-size: 1.6rem;
+          font-weight: 600;
+          color: #143450;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .add-btn {
+          background: #0b2e48;
+          color: white;
+          border: none;
+          padding: 0.7rem 1.5rem;
+          border-radius: 34px;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          cursor: pointer;
+          box-shadow: 0 6px 12px rgba(0, 65, 131, 0.2);
+          transition: all 0.2s;
+        }
+
+        .add-btn:hover {
+          background: #0a2538;
+          transform: translateY(-1px);
+        }
+
+        .table-responsive {
+          overflow-x: auto;
+        }
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 0.95rem;
+        }
+
+        th {
+          text-align: left;
+          padding: 1rem 0.5rem 0.8rem 0.5rem;
+          color: #5f7d9c;
+          font-weight: 600;
+          font-size: 0.85rem;
+          letter-spacing: 0.3px;
+          text-transform: uppercase;
+          border-bottom: 2px solid #e2ebf6;
+        }
+
+        td {
+          padding: 1rem 0.5rem;
+          border-bottom: 1px solid #edf3fa;
+          color: #1f3b58;
+          font-weight: 500;
+        }
+
+        .pub-tag {
+          background: #e4f0fa;
+          color: #0f4b77;
+          padding: 0.25rem 1rem;
+          border-radius: 40px;
+          font-size: 0.8rem;
+          font-weight: 600;
+          display: inline-block;
+        }
+
+        .status-badge {
+          background: #c3e2cf;
+          color: #135f33;
+          font-weight: 600;
+          padding: 0.25rem 0.9rem;
+          border-radius: 40px;
+          font-size: 0.75rem;
+        }
+
+        .status-badge.draft {
+          background: #ffd9b3;
+          color: #8b4513;
+        }
+
+        .action-icons i {
+          margin: 0 6px;
+          color: #7f9cbb;
+          transition: 0.1s;
+          cursor: pointer;
+        }
+
+        .action-icons i:hover {
+          color: #1d4e7c;
+        }
+
+        /* footer */
+        .footer-note {
+          text-align: right;
+          font-size: 0.8rem;
+          color: #8aa4c0;
+          margin-top: 1.4rem;
+          padding-top: 0.5rem;
+        }
+
+        /* Modal */
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1000;
+          padding: 2rem;
+        }
+
+        .modal-content {
+          background: white;
+          border-radius: 24px;
+          padding: 2rem;
+          max-width: 800px;
+          width: 100%;
+          max-height: 90vh;
+          overflow-y: auto;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1.5rem;
+          padding-bottom: 1rem;
+          border-bottom: 2px solid #e9eef3;
+        }
+
+        .modal-header h2 {
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: #0e2c44;
+        }
+
+        .close-btn {
+          background: none;
+          border: none;
+          font-size: 1.5rem;
+          color: #64748b;
+          cursor: pointer;
+          padding: 0.5rem;
+          line-height: 1;
+        }
+
+        .close-btn:hover {
+          color: #1e293b;
+        }
+
+        .form-group {
+          margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+          display: block;
+          margin-bottom: 0.5rem;
+          font-weight: 600;
+          color: #1e293b;
+          font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+          width: 100%;
+          padding: 0.75rem 1rem;
+          border: 1px solid #cbd5e1;
+          border-radius: 12px;
+          font-size: 0.95rem;
+          transition: all 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+          outline: none;
+          border-color: #0b2e48;
+          box-shadow: 0 0 0 3px rgba(11, 46, 72, 0.1);
+        }
+
+        .form-group textarea {
+          resize: vertical;
+          min-height: 120px;
+        }
+
+        .form-actions {
+          display: flex;
+          gap: 1rem;
+          justify-content: flex-end;
+          margin-top: 2rem;
+          padding-top: 1.5rem;
+          border-top: 1px solid #e9eef3;
+        }
+
+        .btn {
+          padding: 0.75rem 1.5rem;
+          border-radius: 12px;
+          font-weight: 600;
+          font-size: 0.95rem;
+          border: none;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .btn-primary {
+          background: #0b2e48;
+          color: white;
+        }
+
+        .btn-primary:hover {
+          background: #0a2538;
+          transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+          background: #e9eef3;
+          color: #64748b;
+        }
+
+        .btn-secondary:hover {
+          background: #cbd5e1;
+        }
+
+        @media (max-width: 1200px) {
+          .dashboard-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (max-width: 768px) {
+          .mobile-menu-toggle {
+            display: flex;
+          }
+
+          .sidebar {
+            transform: translateX(-100%);
+          }
+
+          .sidebar.mobile-open {
+            transform: translateX(0);
+          }
+
+          .mobile-sidebar-overlay.show {
+            display: block;
+          }
+
+          .main-panel {
+            margin-left: 0;
+            width: 100%;
+          }
+
+          .dashboard-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .top-header {
+            padding-left: 5rem;
+          }
+
+          .content {
+            padding: 1rem;
+          }
+
+          .section-title h2 {
+            font-size: 1.3rem;
+          }
+        }
+      `}</style>
+
+      <div style={{ display: "flex", minHeight: "100vh" }}>
+        {/* Mobile Menu Toggle Button */}
+        <button
+          className="mobile-menu-toggle"
+          onClick={() => setShowMobileSidebar(!showMobileSidebar)}
+        >
+          <i className={`fas fa-${showMobileSidebar ? "times" : "bars"}`}></i>
+        </button>
+
+        {/* Mobile Sidebar Overlay */}
+        <div
+          className={`mobile-sidebar-overlay ${showMobileSidebar ? "show" : ""}`}
+          onClick={() => setShowMobileSidebar(false)}
+        ></div>
+
+        {/* SIDEBAR (admin) */}
+        <div className={`sidebar ${showMobileSidebar ? "mobile-open" : ""}`}>
+          <div className="sidebar-header">
+            <i className="fas fa-flask"></i>
+            <span>
+              Research<span style={{ fontWeight: 300 }}>Panel</span>
+            </span>
+          </div>
+          <div className="sidebar-nav">
+            <div
+              className={`nav-item ${activeTab === "dashboard" ? "active" : ""}`}
+              onClick={() => {
+                setActiveTab("dashboard");
+                setShowMobileSidebar(false);
+              }}
+            >
+              <i className="fas fa-tachometer-alt"></i>
+              <span>Dashboard</span>
+            </div>
+            <div
+              className={`nav-item ${activeTab === "publications" ? "active" : ""}`}
+              onClick={() => {
+                setActiveTab("publications");
+                setShowMobileSidebar(false);
+              }}
+            >
+              <i className="fas fa-file-alt"></i>
+              <span>Publications</span>
+            </div>
+            <div
+              className={`nav-item ${activeTab === "authors" ? "active" : ""}`}
+              onClick={() => {
+                router.push("/admin/authors");
+                setShowMobileSidebar(false);
+              }}
+            >
+              <i className="fas fa-users"></i>
+              <span>Authors</span>
+            </div>
+            <div
+              className={`nav-item ${activeTab === "analytics" ? "active" : ""}`}
+              onClick={() => {
+                setActiveTab("analytics");
+                setShowMobileSidebar(false);
+              }}
+            >
+              <i className="fas fa-chart-line"></i>
+              <span>Analytics</span>
+            </div>
+            <div
+              className={`nav-item ${activeTab === "settings" ? "active" : ""}`}
+              onClick={() => {
+                setActiveTab("settings");
+                setShowMobileSidebar(false);
+              }}
+            >
+              <i className="fas fa-cog"></i>
+              <span>Settings</span>
+            </div>
+          </div>
+          <div className="sidebar-footer">
+            <i className="fas fa-database"></i> v2.41 · research core
+          </div>
+        </div>
+
+        {/* MAIN PANEL (dashboard + research publications) */}
+        <div className="main-panel">
+          <div className="top-header">
+            <div className="header-title">
+              <h1>Research publications</h1>
+              <p>
+                <i
+                  className="fas fa-regular fa-calendar-alt"
+                  style={{ marginRight: "6px" }}
+                ></i>{" "}
+                last updated today,{" "}
+                {new Date().toLocaleTimeString("en-US", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </p>
+            </div>
+            <div className="admin-profile">
+              <div className="notification-badge">
+                <i className="fas fa-bell"></i> 3
+              </div>
+              <div className="avatar" onClick={handleLogout} title="Logout">
+                AD
+              </div>
+            </div>
+          </div>
+
+          <div className="content">
+            {/* DASHBOARD CARDS (metrics) */}
+            {activeTab === "dashboard" && (
+              <>
+                <div className="dashboard-grid">
+                  <div className="stat-card">
+                    <div className="stat-left">
+                      <h3>{research.length}</h3>
+                      <p>total pubs</p>
+                    </div>
+                    <div className="stat-icon">
+                      <i className="fas fa-scroll"></i>
+                    </div>
+                  </div>
+                  <div className="stat-card">
+                    <div className="stat-left">
+                      <h3>{publishedCount}</h3>
+                      <p>peer reviewed</p>
+                    </div>
+                    <div className="stat-icon">
+                      <i className="fas fa-check-double"></i>
+                    </div>
+                  </div>
+                  <div className="stat-card">
+                    <div className="stat-left">
+                      <h3>{draftCount}</h3>
+                      <p>preprints</p>
+                    </div>
+                    <div className="stat-icon">
+                      <i className="fas fa-print"></i>
+                    </div>
+                  </div>
+                  <div className="stat-card">
+                    <div className="stat-left">
+                      <h3>{(research.length * 15.3).toFixed(1)}k</h3>
+                      <p>citations</p>
+                    </div>
+                    <div className="stat-icon">
+                      <i className="fas fa-quote-right"></i>
+                    </div>
+                  </div>
+                </div>
+
+                {/* extra row: mini bar chart + recent activity (visual dashboard) */}
+                <div className="insight-row">
+                  <div className="chart-card">
+                    <div className="chart-header">
+                      <h3>
+                        <i
+                          className="fas fa-chart-bar"
+                          style={{ marginRight: "8px", color: "#2563eb" }}
+                        ></i>{" "}
+                        Publications by month
+                      </h3>
+                      <span className="badge-light">2025</span>
+                    </div>
+                    <div className="mini-bars">
+                      <div className="bar-container">
+                        <div className="bar bar-1"></div>
+                        <span className="bar-label">Jan</span>
+                      </div>
+                      <div className="bar-container">
+                        <div className="bar bar-2"></div>
+                        <span className="bar-label">Feb</span>
+                      </div>
+                      <div className="bar-container">
+                        <div className="bar bar-3"></div>
+                        <span className="bar-label">Mar</span>
+                      </div>
+                      <div className="bar-container">
+                        <div className="bar bar-4"></div>
+                        <span className="bar-label">Apr</span>
+                      </div>
+                      <div className="bar-container">
+                        <div className="bar bar-5"></div>
+                        <span className="bar-label">May</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="recent-card">
+                    <h3 style={{ marginBottom: "1rem", fontSize: "1.2rem" }}>
+                      <i className="fas fa-clock"></i> Recent activity
+                    </h3>
+                    {research.slice(0, 3).map((item, idx) => (
+                      <div key={item.id} className="recent-item">
+                        <div className="recent-icon">
+                          <i className="fas fa-plus-circle"></i>
+                        </div>
+                        <div className="recent-detail">
+                          {item.title.substring(0, 25)}...
+                        </div>
+                        <div className="recent-date">
+                          {idx === 0
+                            ? "2h ago"
+                            : idx === 1
+                              ? "5h ago"
+                              : "yesterday"}
+                        </div>
+                      </div>
+                    ))}
+                    {research.length === 0 && (
+                      <div className="recent-item">
+                        <div className="recent-icon">
+                          <i className="fas fa-info-circle"></i>
+                        </div>
+                        <div className="recent-detail">No recent activity</div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </>
+            )}
+
+            {/* RESEARCH PUBLICATIONS ADMIN TABLE (core) */}
+            <div className="publications-section">
+              <div className="section-title">
+                <h2>
+                  <i
+                    className="fas fa-book-open"
+                    style={{ color: "#1f5e9e" }}
+                  ></i>{" "}
+                  Research publications
+                </h2>
+                <button
+                  className="add-btn"
+                  onClick={() => {
+                    resetForm();
+                    setShowAddModal(true);
+                  }}
+                >
+                  <i className="fas fa-plus"></i> New publication
+                </button>
+              </div>
+              <div className="table-responsive">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Authors</th>
+                      <th>Journal / Venue</th>
+                      <th>Year</th>
+                      <th>Type</th>
+                      <th>Status</th>
+                      <th style={{ textAlign: "center" }}>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {loading ? (
+                      <tr>
+                        <td
+                          colSpan={7}
+                          style={{ textAlign: "center", padding: "2rem" }}
+                        >
+                          <i
+                            className="fas fa-spinner fa-spin"
+                            style={{ fontSize: "2rem" }}
+                          ></i>
+                          <p style={{ marginTop: "1rem" }}>Loading...</p>
+                        </td>
+                      </tr>
+                    ) : research.length === 0 ? (
+                      <tr>
+                        <td
+                          colSpan={7}
+                          style={{ textAlign: "center", padding: "2rem" }}
+                        >
+                          <i
+                            className="fas fa-folder-open"
+                            style={{ fontSize: "3rem", color: "#cbd5e1" }}
+                          ></i>
+                          <p style={{ marginTop: "1rem", color: "#64748b" }}>
+                            No publications yet
+                          </p>
+                        </td>
+                      </tr>
+                    ) : (
+                      research.map((item) => (
+                        <tr key={item.id}>
+                          <td>
+                            <strong>{item.title}</strong>
+                          </td>
+                          <td>{item.authors}</td>
+                          <td>{item.category}</td>
+                          <td>{new Date(item.date).getFullYear()}</td>
+                          <td>
+                            <span className="pub-tag">article</span>
+                          </td>
+                          <td>
+                            <span
+                              className={`status-badge ${item.status === "draft" ? "draft" : ""}`}
+                            >
+                              {item.status}
+                            </span>
+                          </td>
+                          <td
+                            className="action-icons"
+                            style={{ textAlign: "center" }}
+                          >
+                            <i className="fas fa-eye" title="view"></i>
+                            <i
+                              className="fas fa-edit"
+                              title="edit"
+                              onClick={() => handleEdit(item)}
+                            ></i>
+                            <i
+                              className="fas fa-trash-alt"
+                              title="delete"
+                              style={{ color: "#acb8ca" }}
+                              onClick={() => handleDelete(item.id)}
+                            ></i>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
+              {/* tiny footer inside card */}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  marginTop: "1.5rem",
+                  color: "#7f9bb9",
+                }}
+              >
+                <span>
+                  <i className="fas fa-chevron-left"></i> 1-{research.length} of{" "}
+                  {research.length} publications
+                </span>
+                <span>
+                  <i className="fas fa-sliders-h"></i> filter
+                </span>
+              </div>
+            </div>
+            <div className="footer-note">
+              <i className="fas fa-shield-alt"></i> admin access · publications
+              updated {Math.floor(Math.random() * 60)} minutes ago
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Add/Edit Modal */}
+      {showAddModal && (
+        <div className="modal-overlay" onClick={() => setShowAddModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>{editingId ? "Edit Publication" : "New Publication"}</h2>
+              <button
+                className="close-btn"
+                onClick={() => setShowAddModal(false)}
+              >
+                <i className="fas fa-times"></i>
+              </button>
+            </div>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label>Title *</label>
+                <input
+                  type="text"
+                  value={formData.title}
+                  onChange={(e) =>
+                    setFormData({ ...formData, title: e.target.value })
+                  }
+                  required
+                  placeholder="Enter publication title"
+                />
+              </div>
+              <div className="form-group">
+                <label>Authors *</label>
+                <input
+                  type="text"
+                  value={formData.authors}
+                  onChange={(e) =>
+                    setFormData({ ...formData, authors: e.target.value })
+                  }
+                  required
+                  placeholder="e.g., M. Chen, A. Kumar"
+                />
+              </div>
+              <div className="form-group">
+                <label>Category *</label>
+                <select
+                  value={formData.category}
+                  onChange={(e) =>
+                    setFormData({ ...formData, category: e.target.value })
+                  }
+                  required
+                >
+                  <option value="">Select Category</option>
+                  <option value="Applied Research">Applied Research</option>
+                  <option value="Policy Analysis">Policy Analysis</option>
+                  <option value="Evaluation">Evaluation</option>
+                  <option value="Development">Development</option>
+                  <option value="Humanitarian">Humanitarian</option>
+                  <option value="Governance">Governance</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label>Publication Date *</label>
+                <input
+                  type="date"
+                  value={formData.date}
+                  onChange={(e) =>
+                    setFormData({ ...formData, date: e.target.value })
+                  }
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Status *</label>
+                <select
+                  value={formData.status}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      status: e.target.value as "draft" | "published",
+                    })
+                  }
+                  required
+                >
+                  <option value="draft">Draft</option>
+                  <option value="published">Published</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label>PDF URL</label>
+                <input
+                  type="url"
+                  value={formData.pdfUrl}
+                  onChange={(e) =>
+                    setFormData({ ...formData, pdfUrl: e.target.value })
+                  }
+                  placeholder="https://example.com/research.pdf"
+                />
+              </div>
+              <div className="form-group">
+                <label>Abstract *</label>
+                <textarea
+                  value={formData.abstract}
+                  onChange={(e) =>
+                    setFormData({ ...formData, abstract: e.target.value })
+                  }
+                  required
+                  placeholder="Enter the publication abstract..."
+                />
+              </div>
+              <div className="form-actions">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => setShowAddModal(false)}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  <i
+                    className={`fas fa-${editingId ? "save" : "plus"}`}
+                    style={{ marginRight: "0.5rem" }}
+                  ></i>
+                  {editingId ? "Update" : "Create"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

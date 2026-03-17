@@ -1,53 +1,14 @@
 "use client";
 
+import Link from "next/link";
+import SecondHeader from "../components/SecondHeader";
+
 export default function ConsultancyPage() {
   return (
     <div className="wireframe-container">
       {/* ===== HEADER ===== */}
-      <header className="header-bar">
-        <div
-          className="container"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: 0,
-          }}
-        >
-          <div className="logo-area">
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              <img
-                src="/logo.png"
-                alt="LAAPS Logo"
-                style={{ height: "50px", width: "auto" }}
-              />
-              <div>
-                <h1>
-                  LAAPS <span style={{ fontWeight: 300 }}>Institute</span>
-                </h1>
-                <div className="logo-tag">
-                  applied analysis · practical solutions
-                </div>
-              </div>
-            </div>
-          </div>
-          <nav className="nav-links">
-            <a href="/#home">Home</a>
-            <a href="/#about">About</a>
-            <a href="/#research">Research</a>
-            <a href="/consultancy">Advisory</a>
 
-            <a href="/#work">Work</a>
-            <a
-              href="#contact"
-              className="cta-button"
-              style={{ padding: ".3rem 1rem" }}
-            >
-              Contact
-            </a>
-          </nav>
-        </div>
-      </header>
+      <SecondHeader />
 
       {/* ===== HERO SECTION ===== */}
       <section className="hero">
@@ -64,7 +25,7 @@ export default function ConsultancyPage() {
             <span className="badge-pill">Consultancy & Advisory Services</span>
             <h1>What We Offer</h1>
             <p className="subhead">
-              The Institute of Research Impact and Development (IRID) delivers
+              The Institute of Research Impact and Development (ALAAPS delivers
               selective, mission-aligned and high impact consultancy and
               advisory services that translate our vision to practice, research
               into decision-making and action.
@@ -77,8 +38,8 @@ export default function ConsultancyPage() {
                 marginTop: "1rem",
               }}
             >
-              IRID does not operate as a generic consulting firm, and instead we
-              provide applied advisory, analytics, learning, and capacity
+              ALAAPS does not operate as a generic consulting firm, and instead
+              we provide applied advisory, analytics, learning, and capacity
               support that reinforces our research agenda, protects analytical
               independence, and contributes to public good.
             </p>
@@ -95,7 +56,7 @@ export default function ConsultancyPage() {
       >
         <div className="container" style={{ padding: "1rem 2.5rem" }}>
           <nav style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
-            <a
+            <Link
               href="/consultancy"
               style={{
                 color: "var(--primary-deep)",
@@ -106,8 +67,8 @@ export default function ConsultancyPage() {
               }}
             >
               Overview
-            </a>
-            <a
+            </Link>
+            <Link
               href="/consultancy/applied-research"
               style={{
                 color: "var(--text-medium)",
@@ -118,8 +79,8 @@ export default function ConsultancyPage() {
               className="sub-nav-link"
             >
               Applied Research
-            </a>
-            <a
+            </Link>
+            <Link
               href="/consultancy/programme-design"
               style={{
                 color: "var(--text-medium)",
@@ -130,8 +91,8 @@ export default function ConsultancyPage() {
               className="sub-nav-link"
             >
               Programme Design
-            </a>
-            <a
+            </Link>
+            <Link
               href="/consultancy/meal"
               style={{
                 color: "var(--text-medium)",
@@ -142,8 +103,8 @@ export default function ConsultancyPage() {
               className="sub-nav-link"
             >
               MEAL
-            </a>
-            <a
+            </Link>
+            <Link
               href="/consultancy/capacity-building"
               style={{
                 color: "var(--text-medium)",
@@ -154,7 +115,7 @@ export default function ConsultancyPage() {
               className="sub-nav-link"
             >
               Capacity Building
-            </a>
+            </Link>
           </nav>
         </div>
       </div>
@@ -168,7 +129,7 @@ export default function ConsultancyPage() {
 
           <div className="grid-2" style={{ gap: "2rem", marginBottom: "3rem" }}>
             {/* Applied Research */}
-            <a
+            <Link
               href="/consultancy/applied-research"
               style={{ textDecoration: "none" }}
             >
@@ -193,7 +154,7 @@ export default function ConsultancyPage() {
                 </div>
                 <div className="advisory-body">
                   <p style={{ marginBottom: "1rem" }}>
-                    IRID undertakes problem driven and decision-oriented
+                    ALAAPS undertakes problem driven and decision-oriented
                     research and analytics services which can inform policy,
                     programming and investment decision making.
                   </p>
@@ -205,10 +166,10 @@ export default function ConsultancyPage() {
                   </ul>
                 </div>
               </div>
-            </a>
+            </Link>
 
             {/* Programme Design */}
-            <a
+            <Link
               href="/consultancy/programme-design"
               style={{ textDecoration: "none" }}
             >
@@ -246,10 +207,10 @@ export default function ConsultancyPage() {
                   </ul>
                 </div>
               </div>
-            </a>
+            </Link>
 
             {/* MEAL */}
-            <a href="/consultancy/meal" style={{ textDecoration: "none" }}>
+            <Link href="/consultancy/meal" style={{ textDecoration: "none" }}>
               <div
                 className="advisory-section-card"
                 style={{
@@ -286,10 +247,10 @@ export default function ConsultancyPage() {
                   </ul>
                 </div>
               </div>
-            </a>
+            </Link>
 
             {/* Capacity Building */}
-            <a
+            <Link
               href="/consultancy/capacity-building"
               style={{ textDecoration: "none" }}
             >
@@ -326,7 +287,7 @@ export default function ConsultancyPage() {
                   </ul>
                 </div>
               </div>
-            </a>
+            </Link>
           </div>
 
           {/* Environmental & Social Risk */}
@@ -350,7 +311,7 @@ export default function ConsultancyPage() {
             </div>
             <div className="advisory-body">
               <p style={{ marginBottom: "1rem" }}>
-                IRID helps partners identify, manage, and reduce environmental
+                ALAAPS helps partners identify, manage, and reduce environmental
                 and social risks so programmes and investments are safer, more
                 inclusive, and meet safeguard expectations.
               </p>
@@ -370,7 +331,7 @@ export default function ConsultancyPage() {
                 }}
               >
                 Where full technical ESIA studies require specialised licensed
-                inputs, IRID partners with specialist firms while providing
+                inputs, ALAAPS partners with specialist firms while providing
                 analytical leadership and safeguards coordination.
               </p>
             </div>
@@ -383,7 +344,7 @@ export default function ConsultancyPage() {
               Consultancy Principles
             </h3>
             <p style={{ marginBottom: "1.5rem" }}>
-              IRID's consultancy services are guided by the following
+              ALAAPS s consultancy services are guided by the following
               principles:
             </p>
             <div
@@ -395,7 +356,7 @@ export default function ConsultancyPage() {
             >
               <div>
                 <strong style={{ color: "var(--primary-deep)" }}>
-                  Mission alignment with IRID's research agenda:
+                  Mission alignment with ALAAPS s research agenda:
                 </strong>{" "}
                 We prioritize assignments that reinforce our core purpose and
                 thematic priorities.
@@ -418,7 +379,7 @@ export default function ConsultancyPage() {
                 <strong style={{ color: "var(--primary-deep)" }}>
                   Selectivity and quality:
                 </strong>{" "}
-                We focus on high-value engagements where IRID can add depth,
+                We focus on high-value engagements where ALAAPS can add depth,
                 clarity, and practical value.
               </div>
             </div>

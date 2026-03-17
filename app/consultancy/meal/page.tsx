@@ -1,50 +1,12 @@
 "use client";
 
+import SecondHeader from "@/app/components/SecondHeader";
+
 export default function MEALPage() {
   return (
     <div className="wireframe-container">
       {/* ===== HEADER ===== */}
-      <header className="header-bar">
-        <div
-          className="container"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: 0,
-          }}
-        >
-          <div className="logo-area">
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              <img
-                src="/logo.png"
-                alt="LAAPS Logo"
-                style={{ height: "50px", width: "auto" }}
-              />
-              <div>
-                <h1>
-                  LAAPS <span style={{ fontWeight: 300 }}>Institute</span>
-                </h1>
-                <div className="logo-tag">
-                  applied analysis · practical solutions
-                </div>
-              </div>
-            </div>
-          </div>
-          <nav className="nav-links">
-            <a href="/#home">Home</a>
-            <a href="/#about">About</a>
-            <a href="/#research">Research</a>
-            <a href="/#advisory">Advisory</a>
-            <a href="/#approach">Approach</a>
-            <a href="/#work">Work</a>
-            <a href="/#contact">Contact</a>
-            <a href="/#contact" className="cta-button">
-              Partner with us
-            </a>
-          </nav>
-        </div>
-      </header>
+      <SecondHeader />
 
       {/* ===== HERO SECTION ===== */}
       <section className="hero">
@@ -153,9 +115,9 @@ export default function MEALPage() {
               Cross-Sectoral MEAL Services
             </h3>
             <p>
-              While IRID's thematic pillars focus on climate risk, livelihoods,
-              natural capital, and energy, our MEAL services extend beyond these
-              areas.{" "}
+              While ALAAPS's thematic pillars focus on climate risk,
+              livelihoods, natural capital, and energy, our MEAL services extend
+              beyond these areas.{" "}
               <strong>
                 We offer MEAL services across all sectors including Health,
                 Nutrition, Education, and more.
@@ -249,7 +211,7 @@ export default function MEALPage() {
               </div>
               <div className="advisory-body">
                 <p style={{ marginBottom: "1rem" }}>
-                  IRID conducts formative and summative evaluations using
+                  ALAAPS conducts formative and summative evaluations using
                   rigorous and context-appropriate methodologies:
                 </p>
                 <ul className="service-list">

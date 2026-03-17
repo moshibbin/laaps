@@ -1,50 +1,12 @@
 "use client";
 
+import SecondHeader from "@/app/components/SecondHeader";
+
 export default function AppliedResearchPage() {
   return (
     <div className="wireframe-container">
       {/* ===== HEADER ===== */}
-      <header className="header-bar">
-        <div
-          className="container"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: 0,
-          }}
-        >
-          <div className="logo-area">
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              <img
-                src="/logo.png"
-                alt="LAAPS Logo"
-                style={{ height: "50px", width: "auto" }}
-              />
-              <div>
-                <h1>
-                  LAAPS <span style={{ fontWeight: 300 }}>Institute</span>
-                </h1>
-                <div className="logo-tag">
-                  applied analysis · practical solutions
-                </div>
-              </div>
-            </div>
-          </div>
-          <nav className="nav-links">
-            <a href="/#home">Home</a>
-            <a href="/#about">About</a>
-            <a href="/#research">Research</a>
-            <a href="/#advisory">Advisory</a>
-            <a href="/#approach">Approach</a>
-            <a href="/#work">Work</a>
-            <a href="/#contact">Contact</a>
-            <a href="/#contact" className="cta-button">
-              Partner with us
-            </a>
-          </nav>
-        </div>
-      </header>
+      <SecondHeader />
 
       {/* ===== HERO SECTION ===== */}
       <section className="hero">
@@ -147,7 +109,7 @@ export default function AppliedResearchPage() {
       <div className="section">
         <div className="container">
           <h2 style={{ marginBottom: "2rem" }}>
-            Core Analytics We Deliver (Aligned with IRID's Four Pillars)
+            Core Analytics We Deliver (Aligned with ALAAPS s Four Pillars)
           </h2>
 
           <div
@@ -181,7 +143,7 @@ export default function AppliedResearchPage() {
                     Climate Risk & Vulnerability Analysis (CRVA):
                   </strong>
                   <p>
-                    IRID conducts multi-hazard climate risk and vulnerability
+                    ALAAPS conducts multi-hazard climate risk and vulnerability
                     analysis to understand not only where risks occur, but what
                     they mean for different households and livelihood systems.
                     This includes risk profiling, hotspot mapping, and
@@ -190,7 +152,7 @@ export default function AppliedResearchPage() {
                     institutional analysis.
                   </p>
                   <p style={{ marginTop: "0.5rem" }}>
-                    IRID uses Household Economy Analysis (HEA) to translate
+                    ALAAPS uses Household Economy Analysis (HEA) to translate
                     climate exposure into household-level impacts on food
                     access, income, and essential expenditure, enabling analysis
                     of compounding and cascading risks, seasonality and timing
@@ -209,7 +171,7 @@ export default function AppliedResearchPage() {
                     Early Warning and Trigger Analytics:
                   </strong>
                   <p>
-                    IRID delivers early warning and trigger analytics that
+                    ALAAPS delivers early warning and trigger analytics that
                     connect climate and hazard signals to decision-relevant
                     household outcomes, supporting anticip​​atory action and
                     risk-informed decision-making. This includes historical
@@ -229,10 +191,10 @@ export default function AppliedResearchPage() {
                     Scenario Analysis and Stress Testing:
                   </strong>
                   <p>
-                    IRID undertakes forward-looking scenario analysis and stress
-                    testing to explore how drought, flood, market, conflict, and
-                    compound shocks affect households, livelihoods, and systems
-                    under different conditions.
+                    ALAAPS undertakes forward-looking scenario analysis and
+                    stress testing to explore how drought, flood, market,
+                    conflict, and compound shocks affect households,
+                    livelihoods, and systems under different conditions.
                   </p>
                 </div>
 
@@ -247,7 +209,7 @@ export default function AppliedResearchPage() {
                     Climate–Security Analysis:
                   </strong>
                   <p>
-                    IRID analyses climate–security linkages to understand how
+                    ALAAPS analyses climate–security linkages to understand how
                     climate stress interacts with livelihood disruption,
                     resource competition, displacement, and conflict dynamics.
                   </p>
@@ -270,9 +232,9 @@ export default function AppliedResearchPage() {
               </div>
               <div className="advisory-body">
                 <p style={{ marginBottom: "1rem" }}>
-                  IRID provides applied analysis and advisory support on natural
-                  capital and ecosystem systems, with a focus on dryland and
-                  fragile environments where livelihoods, climate risk, and
+                  ALAAPS provides applied analysis and advisory support on
+                  natural capital and ecosystem systems, with a focus on dryland
+                  and fragile environments where livelihoods, climate risk, and
                   resource governance intersect.
                 </p>
                 <ul className="service-list">
@@ -322,7 +284,7 @@ export default function AppliedResearchPage() {
               </div>
               <div className="advisory-body">
                 <p style={{ marginBottom: "1rem" }}>
-                  IRID's work on rural and urban economies is anchored in
+                  ALAAPS s work on rural and urban economies is anchored in
                   Household Economy Analysis (HEA) as a core framework for
                   understanding how households earn income, access food and
                   essential services, manage risk, and cope with shocks.
@@ -382,10 +344,10 @@ export default function AppliedResearchPage() {
               </div>
               <div className="advisory-body">
                 <p style={{ marginBottom: "1rem" }}>
-                  IRID provides analytical and advisory support on energy access
-                  and green economy transition, with a focus on understanding
-                  system constraints, risks, and opportunities in fragile and
-                  low-capacity contexts.
+                  ALAAPS provides analytical and advisory support on energy
+                  access and green economy transition, with a focus on
+                  understanding system constraints, risks, and opportunities in
+                  fragile and low-capacity contexts.
                 </p>
                 <ul className="service-list">
                   <li>

@@ -1,50 +1,12 @@
 "use client";
 
+import SecondHeader from "../components/SecondHeader";
+
 export default function ServicesPage() {
   return (
     <div className="wireframe-container">
       {/* ===== HEADER ===== */}
-      <header className="header-bar">
-        <div
-          className="container"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: 0,
-          }}
-        >
-          <div className="logo-area">
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              <img
-                src="/logo.png"
-                alt="LAAPS Logo"
-                style={{ height: "50px", width: "auto" }}
-              />
-              <div>
-                <h1>
-                  LAAPS <span style={{ fontWeight: 300 }}>Institute</span>
-                </h1>
-                <div className="logo-tag">
-                  applied analysis · practical solutions
-                </div>
-              </div>
-            </div>
-          </div>
-          <nav className="nav-links">
-            <a href="/#home">Home</a>
-            <a href="/#about">About</a>
-            <a href="/#research">Research</a>
-            <a href="/#advisory">Advisory</a>
-            <a href="/#approach">Approach</a>
-            <a href="/#work">Work</a>
-            <a href="/#contact">Contact</a>
-            <a href="/#contact" className="cta-button">
-              Partner with us
-            </a>
-          </nav>
-        </div>
-      </header>
+      <SecondHeader />
 
       {/* ===== HERO SECTION ===== */}
       <section className="hero">
