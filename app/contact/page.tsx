@@ -146,13 +146,13 @@ export default function ContactPage() {
                         Email
                       </h3>
                       <a
-                        href="mailto:general@laaps.institute"
+                        href="mailto:info@laapsinstitute.com"
                         style={{
                           color: "var(--primary-deep)",
                           textDecoration: "none",
                         }}
                       >
-                        general@laaps.institute
+                        info@laapsinstitute.com
                       </a>
                     </div>
                   </div>
@@ -184,7 +184,8 @@ export default function ContactPage() {
                       >
                         Phone
                       </h3>
-                      <p style={{ margin: 0 }}>+254 115 783 111 (Nairobi)</p>
+                      <p style={{ margin: 0 }}>+252 634 888 070</p>
+                      <p style={{ margin: "0.5rem 0 0 0" }}>+252 634 000 203</p>
                     </div>
                   </div>
                 </div>
@@ -254,7 +255,9 @@ export default function ContactPage() {
                       </h3>
                       <p style={{ margin: 0 }}>
                         <a
-                          href="#"
+                          href="https://www.linkedin.com/company/laaps-institute"
+                          target="_blank"
+                          rel="noopener noreferrer"
                           style={{
                             color: "var(--primary-deep)",
                             textDecoration: "none",
@@ -264,7 +267,9 @@ export default function ContactPage() {
                           LinkedIn
                         </a>
                         <a
-                          href="#"
+                          href="https://twitter.com/LAAPSInstitute"
+                          target="_blank"
+                          rel="noopener noreferrer"
                           style={{
                             color: "var(--primary-deep)",
                             textDecoration: "none",
@@ -539,99 +544,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="footer" id="footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <h3 style={{ color: "white" }}>LAAPS Institute</h3>
-              <p style={{ color: "#b9c6cc" }}>
-                Institute of Applied Analysis for Practical Solutions
-              </p>
-              <p
-                style={{
-                  color: "#b9c6cc",
-                  fontSize: "0.9rem",
-                  marginTop: "1rem",
-                }}
-              >
-                Advancing research for real-world solutions in the Horn of
-                Africa.
-              </p>
-              <div
-                style={{
-                  margin: "1rem 0",
-                  color: "#b9c6cc",
-                  fontSize: "1.5rem",
-                }}
-              >
-                <i
-                  className="fab fa-linkedin"
-                  style={{ marginRight: "1rem", cursor: "pointer" }}
-                ></i>
-                <i className="fab fa-twitter" style={{ cursor: "pointer" }}></i>
-              </div>
-            </div>
-            <div>
-              <p style={{ fontWeight: 600, color: "white" }}>Quick links</p>
-              <ul style={{ listStyle: "none", color: "#b9c6cc" }}>
-                <li>
-                  <a href="/#research">Research</a>
-                </li>
-                <li>
-                  <a href="/#advisory">Advisory</a>
-                </li>
-                <li>
-                  <a href="/services">Services</a>
-                </li>
-                <li>
-                  <a href="/projects">Projects</a>
-                </li>
-                <li>
-                  <a href="/contact">Contact</a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <p style={{ fontWeight: 600, color: "white" }}>Contact</p>
-              <p style={{ color: "#b9c6cc" }}>
-                <i
-                  className="fas fa-envelope"
-                  style={{ marginRight: "0.5rem" }}
-                ></i>
-                general@laaps.institute
-                <br />
-                <i
-                  className="fas fa-phone"
-                  style={{ marginRight: "0.5rem" }}
-                ></i>
-                +254 115 783 111 (Nairobi)
-                <br />
-                <i
-                  className="fas fa-map-marker-alt"
-                  style={{ marginRight: "0.5rem" }}
-                ></i>
-                Hargeisa · Mogadishu · Garowe
-              </p>
-            </div>
-          </div>
-          <hr />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              color: "#b9c6cc",
-              fontSize: "0.8rem",
-              flexWrap: "wrap",
-              gap: "1rem",
-            }}
-          >
-            <span>© 2025 LAAPS Institute – all rights reserved</span>
-            <span>Privacy policy · Terms · Safeguarding</span>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

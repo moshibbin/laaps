@@ -33,28 +33,24 @@ export default function AppliedResearchPage() {
       </section>
 
       {/* ===== SUB-NAVIGATION ===== */}
-      <div
-        style={{
-          background: "var(--surface-light)",
-          borderBottom: "1px solid var(--border-color)",
-        }}
-      >
-        <div className="container" style={{ padding: "1rem 2.5rem" }}>
-          <nav style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
+      <div className="consultancy-subnav-shell">
+        <div className="container consultancy-subnav-container">
+          <nav className="consultancy-subnav-list">
             <a
               href="/consultancy"
+              className="consultancy-subnav-link sub-nav-link"
               style={{
                 color: "var(--text-medium)",
                 fontWeight: 500,
                 textDecoration: "none",
                 paddingBottom: "0.5rem",
               }}
-              className="sub-nav-link"
             >
               Overview
             </a>
             <a
               href="/consultancy/applied-research"
+              className="consultancy-subnav-link consultancy-subnav-link-active"
               style={{
                 color: "var(--primary-deep)",
                 fontWeight: 600,
@@ -67,37 +63,37 @@ export default function AppliedResearchPage() {
             </a>
             <a
               href="/consultancy/programme-design"
+              className="consultancy-subnav-link sub-nav-link"
               style={{
                 color: "var(--text-medium)",
                 fontWeight: 500,
                 textDecoration: "none",
                 paddingBottom: "0.5rem",
               }}
-              className="sub-nav-link"
             >
               Programme Design
             </a>
             <a
               href="/consultancy/meal"
+              className="consultancy-subnav-link sub-nav-link"
               style={{
                 color: "var(--text-medium)",
                 fontWeight: 500,
                 textDecoration: "none",
                 paddingBottom: "0.5rem",
               }}
-              className="sub-nav-link"
             >
               MEAL
             </a>
             <a
               href="/consultancy/capacity-building"
+              className="consultancy-subnav-link sub-nav-link"
               style={{
                 color: "var(--text-medium)",
                 fontWeight: 500,
                 textDecoration: "none",
                 paddingBottom: "0.5rem",
               }}
-              className="sub-nav-link"
             >
               Capacity Building
             </a>
@@ -226,20 +222,20 @@ export default function AppliedResearchPage() {
                 <div>
                   <h3>Pillar 2: Natural Capital and Ecosystems</h3>
                   <p className="advisory-subtitle">
-                    Dryland and fragile environment analysis
+                    Drylands and fragile environment analysis
                   </p>
                 </div>
               </div>
               <div className="advisory-body">
                 <p style={{ marginBottom: "1rem" }}>
                   ALAAPS provides applied analysis and advisory support on
-                  natural capital and ecosystem systems, with a focus on dryland
-                  and fragile environments where livelihoods, climate risk, and
-                  resource governance intersect.
+                  natural capital and ecosystem systems, with a focus on
+                  drylands and fragile environments where livelihoods, climate
+                  risk, and resource governance intersect.
                 </p>
                 <ul className="service-list">
                   <li>
-                    <strong>Rangeland and dryland system analytics:</strong>{" "}
+                    <strong>Rangeland and drylands system analytics:</strong>{" "}
                     vegetation and pasture conditions, grazing pressure, land
                     degradation drivers
                   </li>
@@ -399,99 +395,6 @@ export default function AppliedResearchPage() {
           </div>
         </div>
       </div>
-
-      {/* ===== FOOTER ===== */}
-      <footer className="footer" id="contact">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <h3 style={{ color: "white" }}>LAAPS Institute</h3>
-              <p style={{ color: "#b9c6cc" }}>
-                Institute of Applied Analysis for Practical Solutions
-              </p>
-              <p
-                style={{
-                  color: "#b9c6cc",
-                  fontSize: "0.9rem",
-                  marginTop: "1rem",
-                }}
-              >
-                Advancing research for real-world solutions in the Horn of
-                Africa.
-              </p>
-              <div
-                style={{
-                  margin: "1rem 0",
-                  color: "#b9c6cc",
-                  fontSize: "1.5rem",
-                }}
-              >
-                <i
-                  className="fab fa-linkedin"
-                  style={{ marginRight: "1rem", cursor: "pointer" }}
-                ></i>
-                <i className="fab fa-twitter" style={{ cursor: "pointer" }}></i>
-              </div>
-            </div>
-            <div>
-              <p style={{ fontWeight: 600, color: "white" }}>Quick links</p>
-              <ul style={{ listStyle: "none", color: "#b9c6cc" }}>
-                <li>
-                  <a href="/#research">Research</a>
-                </li>
-                <li>
-                  <a href="/#advisory">Consultancy</a>
-                </li>
-                <li>
-                  <a href="/#approach">Our Approach</a>
-                </li>
-                <li>
-                  <a href="/#work">Work</a>
-                </li>
-                <li>
-                  <a href="/#contact">Contact</a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <p style={{ fontWeight: 600, color: "white" }}>Contact</p>
-              <p style={{ color: "#b9c6cc" }}>
-                <i
-                  className="fas fa-envelope"
-                  style={{ marginRight: "0.5rem" }}
-                ></i>
-                general@laaps.institute
-                <br />
-                <i
-                  className="fas fa-phone"
-                  style={{ marginRight: "0.5rem" }}
-                ></i>
-                +254 115 783 111 (Nairobi)
-                <br />
-                <i
-                  className="fas fa-map-marker-alt"
-                  style={{ marginRight: "0.5rem" }}
-                ></i>
-                Hargeisa · Mogadishu · Garowe
-              </p>
-            </div>
-          </div>
-          <hr />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              color: "#b9c6cc",
-              fontSize: "0.8rem",
-              flexWrap: "wrap",
-              gap: "1rem",
-            }}
-          >
-            <span>© 2025 LAAPS Institute – all rights reserved</span>
-            <span>Privacy policy · Terms · Safeguarding</span>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

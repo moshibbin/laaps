@@ -34,64 +34,60 @@ export default function CapacityBuildingPage() {
       </section>
 
       {/* ===== SUB-NAVIGATION ===== */}
-      <div
-        style={{
-          background: "var(--surface-light)",
-          borderBottom: "1px solid var(--border-color)",
-        }}
-      >
-        <div className="container" style={{ padding: "1rem 2.5rem" }}>
-          <nav style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
+      <div className="consultancy-subnav-shell">
+        <div className="container consultancy-subnav-container">
+          <nav className="consultancy-subnav-list">
             <a
               href="/consultancy"
+              className="consultancy-subnav-link sub-nav-link"
               style={{
                 color: "var(--text-medium)",
                 fontWeight: 500,
                 textDecoration: "none",
                 paddingBottom: "0.5rem",
               }}
-              className="sub-nav-link"
             >
               Overview
             </a>
             <a
               href="/consultancy/applied-research"
+              className="consultancy-subnav-link sub-nav-link"
               style={{
                 color: "var(--text-medium)",
                 fontWeight: 500,
                 textDecoration: "none",
                 paddingBottom: "0.5rem",
               }}
-              className="sub-nav-link"
             >
               Applied Research
             </a>
             <a
               href="/consultancy/programme-design"
+              className="consultancy-subnav-link sub-nav-link"
               style={{
                 color: "var(--text-medium)",
                 fontWeight: 500,
                 textDecoration: "none",
                 paddingBottom: "0.5rem",
               }}
-              className="sub-nav-link"
             >
               Programme Design
             </a>
             <a
               href="/consultancy/meal"
+              className="consultancy-subnav-link sub-nav-link"
               style={{
                 color: "var(--text-medium)",
                 fontWeight: 500,
                 textDecoration: "none",
                 paddingBottom: "0.5rem",
               }}
-              className="sub-nav-link"
             >
               MEAL
             </a>
             <a
               href="/consultancy/capacity-building"
+              className="consultancy-subnav-link consultancy-subnav-link-active"
               style={{
                 color: "var(--primary-deep)",
                 fontWeight: 600,
@@ -300,21 +296,21 @@ export default function CapacityBuildingPage() {
                 marginTop: "1rem",
               }}
             >
-              <div>
+              <div style={{ color: "var(--text-medium)" }}>
                 <strong style={{ color: "var(--primary-deep)" }}>
                   Applied, Not Academic:
                 </strong>{" "}
                 Every learning programme is grounded in real-world problems and
                 contexts
               </div>
-              <div>
+              <div style={{ color: "var(--text-medium)" }}>
                 <strong style={{ color: "var(--primary-deep)" }}>
                   Practitioner-Led:
                 </strong>{" "}
                 Led by experienced practitioners who have applied these tools in
                 the field
               </div>
-              <div>
+              <div style={{ color: "var(--text-medium)" }}>
                 <strong style={{ color: "var(--primary-deep)" }}>
                   Learning by Doing:
                 </strong>{" "}
@@ -352,99 +348,6 @@ export default function CapacityBuildingPage() {
           </div>
         </div>
       </div>
-
-      {/* ===== FOOTER ===== */}
-      <footer className="footer" id="contact">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <h3 style={{ color: "white" }}>LAAPS Institute</h3>
-              <p style={{ color: "#b9c6cc" }}>
-                Institute of Applied Analysis for Practical Solutions
-              </p>
-              <p
-                style={{
-                  color: "#b9c6cc",
-                  fontSize: "0.9rem",
-                  marginTop: "1rem",
-                }}
-              >
-                Advancing research for real-world solutions in the Horn of
-                Africa.
-              </p>
-              <div
-                style={{
-                  margin: "1rem 0",
-                  color: "#b9c6cc",
-                  fontSize: "1.5rem",
-                }}
-              >
-                <i
-                  className="fab fa-linkedin"
-                  style={{ marginRight: "1rem", cursor: "pointer" }}
-                ></i>
-                <i className="fab fa-twitter" style={{ cursor: "pointer" }}></i>
-              </div>
-            </div>
-            <div>
-              <p style={{ fontWeight: 600, color: "white" }}>Quick links</p>
-              <ul style={{ listStyle: "none", color: "#b9c6cc" }}>
-                <li>
-                  <a href="/#research">Research</a>
-                </li>
-                <li>
-                  <a href="/#advisory">Consultancy</a>
-                </li>
-                <li>
-                  <a href="/#approach">Our Approach</a>
-                </li>
-                <li>
-                  <a href="/#work">Work</a>
-                </li>
-                <li>
-                  <a href="/#contact">Contact</a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <p style={{ fontWeight: 600, color: "white" }}>Contact</p>
-              <p style={{ color: "#b9c6cc" }}>
-                <i
-                  className="fas fa-envelope"
-                  style={{ marginRight: "0.5rem" }}
-                ></i>
-                general@laaps.institute
-                <br />
-                <i
-                  className="fas fa-phone"
-                  style={{ marginRight: "0.5rem" }}
-                ></i>
-                +254 115 783 111 (Nairobi)
-                <br />
-                <i
-                  className="fas fa-map-marker-alt"
-                  style={{ marginRight: "0.5rem" }}
-                ></i>
-                Hargeisa · Mogadishu · Garowe
-              </p>
-            </div>
-          </div>
-          <hr />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              color: "#b9c6cc",
-              fontSize: "0.8rem",
-              flexWrap: "wrap",
-              gap: "1rem",
-            }}
-          >
-            <span>© 2025 LAAPS Institute – all rights reserved</span>
-            <span>Privacy policy · Terms · Safeguarding</span>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

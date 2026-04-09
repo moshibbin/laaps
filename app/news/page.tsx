@@ -126,24 +126,6 @@ export default function NewsPage() {
           letter-spacing: -0.5px;
         }
 
-        .nav-links {
-          display: flex;
-          gap: 2rem;
-          align-items: center;
-        }
-
-        .nav-links a {
-          color: rgba(255, 255, 255, 0.9);
-          text-decoration: none;
-          font-weight: 500;
-          font-size: 0.95rem;
-          transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-          color: white;
-        }
-
         /* Hero Section */
         .hero-section {
           background: linear-gradient(135deg, #0b2e48 0%, #1a4d6f 100%);
@@ -363,10 +345,6 @@ export default function NewsPage() {
 
           .featured-news {
             grid-template-columns: 1fr;
-          }
-
-          .nav-links {
-            display: none;
           }
         }
       `}</style>

@@ -140,7 +140,7 @@ export default function Page() {
       {/* ===== HERO ===== */}
       <section className="hero" id="home">
         <div
-          className="container"
+          className="container home-hero-layout"
           style={{
             display: "flex",
             alignItems: "center",
@@ -149,9 +149,9 @@ export default function Page() {
             minHeight: "500px",
           }}
         >
-          <div style={{ flex: 1.2 }}>
+          <div className="home-hero-copy" style={{ flex: 1.2 }}>
             <span
-              className="badge-pill"
+              className="badge-pill home-hero-badge"
               style={{
                 background:
                   "linear-gradient(135deg, var(--primary-deep), var(--secondary-earth))",
@@ -168,6 +168,7 @@ export default function Page() {
               Horn of Africa · since 2020
             </span>
             <h1
+              className="home-hero-title"
               style={{
                 fontSize: "3.5rem",
                 lineHeight: "1.2",
@@ -178,6 +179,7 @@ export default function Page() {
               Advancing research for
               <br />
               <span
+                className="home-hero-typed"
                 style={{
                   background:
                     "linear-gradient(135deg, var(--primary-deep), var(--secondary-earth))",
@@ -224,12 +226,21 @@ export default function Page() {
               working across the Horn of Africa. We turn complex evidence into
               practical, sustainable solutions for fragile contexts.
             </p>
-            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-              <a
+            <div
+              className="home-hero-actions"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "1.25rem",
+                flexWrap: "wrap",
+              }}
+            >
+              <Link
                 href="#work"
                 className="cta-button"
                 style={{
-                  display: "inline-block",
+                  display: "inline-flex",
+                  alignItems: "center",
                   padding: "0.9rem 2rem",
                   fontSize: "1rem",
                   borderRadius: "30px",
@@ -237,24 +248,27 @@ export default function Page() {
                   transition: "all 0.3s ease",
                 }}
               >
-                Explore our work →
-              </a>
-              <a
+                Explore our work
+              </Link>
+              <Link
                 href="#research"
-                className="btn-outline"
+                className="home-hero-secondary-link"
                 style={{
-                  display: "inline-block",
-                  padding: "0.9rem 2rem",
-                  fontSize: "1rem",
-                  borderRadius: "30px",
-                  transition: "all 0.3s ease",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  color: "var(--primary-deep)",
+                  fontWeight: 700,
+                  textDecoration: "underline",
+                  textUnderlineOffset: "4px",
+                  whiteSpace: "nowrap",
                 }}
               >
                 Our expertise
-              </a>
+              </Link>
             </div>
           </div>
           <div
+            className="home-hero-media-shell"
             style={{
               // flex: 0.8,
               background: "linear-gradient(135deg, #e8e3dd, #d9d2cb)",
@@ -271,8 +285,12 @@ export default function Page() {
               transition: "transform 0.3s ease, box-shadow 0.3s ease",
             }}
           >
-            <div style={{ textAlign: "center" }}>
+            <div
+              className="home-hero-media-inner"
+              style={{ textAlign: "center" }}
+            >
               <div
+                className="home-hero-media-frame"
                 style={{
                   flex: 0.8,
                   height: "280px",
@@ -283,6 +301,7 @@ export default function Page() {
                 }}
               >
                 <img
+                  className="home-hero-image"
                   src="/hero.jpg"
                   alt="LAAPS Consultancy"
                   style={{
@@ -305,6 +324,7 @@ export default function Page() {
       >
         <div className="container">
           <div
+            className="home-about-summary"
             style={{
               display: "flex",
               gap: "3rem",
@@ -314,14 +334,14 @@ export default function Page() {
               borderRadius: "40px",
             }}
           >
-            <div>
+            <div className="home-about-icon">
               <span
                 style={{ fontSize: "2.5rem", color: "var(--secondary-earth)" }}
               >
                 <i className="fas fa-handshake"></i>
               </span>
             </div>
-            <div>
+            <div className="home-about-text">
               <p style={{ fontSize: "1rem" }}>
                 <strong>
                   LAAPS is a research-led institute rooted in the Horn of
@@ -442,7 +462,7 @@ export default function Page() {
               <h3>Environmental sustainability</h3>
               <p>Rangelands, water & land, coastal systems, NbS.</p>
               <div className="tag-group">
-                <span className="tag">drylands</span>
+                <span className="tag">Drylands</span>
                 <span className="tag">blue economy</span>
               </div>
             </div>
@@ -488,11 +508,13 @@ export default function Page() {
           {/* Cross cutting lenses */}
           <div className="cross-cutting">
             <span className="lens-item">
-              <i
-                className="fas fa-shield-alt"
-                style={{ marginRight: "4px" }}
-              ></i>{" "}
-              Governance & Institutions
+              <Link href={"/publications"}>
+                <i
+                  className="fas fa-shield-alt"
+                  style={{ marginRight: "4px" }}
+                ></i>{" "}
+                Governance & Institutions
+              </Link>
             </span>
             <span className="lens-item">
               <i className="fas fa-venus-mars"></i> GESI
@@ -538,7 +560,7 @@ export default function Page() {
                   → Rangeland systems and pastoral resources
                 </li>
                 <li style={{ padding: "0.3rem 0" }}>
-                  → Water and land systems in dryland environments
+                  → Water and land systems in Drylands environments
                 </li>
                 <li style={{ padding: "0.3rem 0" }}>
                   → Water, land, and coastal systems (blue economy)
@@ -775,658 +797,521 @@ export default function Page() {
             </div>
           </div>
           {/* View all services link */}
-          <div style={{ textAlign: "center", marginTop: "2rem" }}>
-            <a
-              href="/services"
-              className="cta-button"
-              style={{ display: "inline-block" }}
-            >
-              View all services →
-            </a>
-          </div>
-          {/* Cross cutting lenses */}
-          <div className="cross-cutting">
-            <span className="lens-item">
-              <i
-                className="fas fa-shield-alt"
-                style={{ marginRight: "4px" }}
-              ></i>{" "}
-              Governance & Institutions
-            </span>
-            <span className="lens-item">
-              <i className="fas fa-venus-mars"></i> GESI
-            </span>
-            <span className="lens-item">
-              <i className="fas fa-heart"></i> Conflict Sensitivity & Do-No-Harm
-            </span>
-            <span className="lens-item">
-              <i className="fas fa-database"></i> Ethics, Safeguarding &
-              Research Integrity
-            </span>
-            <span className="lens-item">
-              <i className="fas fa-comments"></i> Knowledge Translation & Uptake
-            </span>
-          </div>
         </div>
       </div>
 
-      {/* ===== OUR APPROACH ===== */}
-      <div className="section section-bg-light" id="approach">
-        <div className="container">
-          <h2>Our Approach</h2>
-          <p style={{ maxWidth: "70%", marginBottom: "2rem" }}>
-            LAAPS operates at the intersection of research, policy, and
-            practice. We bridge disciplines—combining social science, policy
-            analysis, systems thinking, and applied research.
-          </p>
-          <div className="grid-3">
-            <div className="approach-card">
-              <i className="fas fa-lightbulb pillar-icon"></i>
-              <h3>Evidence-to-Action</h3>
-              <p>
-                We translate complex evidence into practical decision pathways,
-                supporting institutions to act with confidence in uncertain
-                contexts.
-              </p>
-            </div>
-            <div className="approach-card">
-              <i className="fas fa-project-diagram pillar-icon"></i>
-              <h3>Systems Thinking</h3>
-              <p>
-                We examine interconnected challenges across climate, governance,
-                livelihoods, and social systems to identify leverage points for
-                change.
-              </p>
-            </div>
-            <div className="approach-card">
-              <i className="fas fa-handshake pillar-icon"></i>
-              <h3>Partnership-Based</h3>
-              <p>
-                We strengthen local analytical capacity so that impact endures
-                beyond individual projects, building long-term institutional
-                capability.
-              </p>
+      <div style={{ textAlign: "center", marginTop: "2rem" }}>
+        <div className="section section-bg-light" id="approach">
+          <div className="container">
+            <h2>Our Approach</h2>
+            <p style={{ maxWidth: "70%", marginBottom: "2rem" }}>
+              LAAPS operates at the intersection of research, policy, and
+              practice. We bridge disciplines—combining social science, policy
+              analysis, systems thinking, and applied research.
+            </p>
+            <div className="grid-3">
+              <div className="approach-card">
+                <i className="fas fa-lightbulb pillar-icon"></i>
+                <h3>Evidence-to-Action</h3>
+                <p>
+                  We translate complex evidence into practical decision
+                  pathways, supporting institutions to act with confidence in
+                  uncertain contexts.
+                </p>
+              </div>
+              <div className="approach-card">
+                <i className="fas fa-project-diagram pillar-icon"></i>
+                <h3>Systems Thinking</h3>
+                <p>
+                  We examine interconnected challenges across climate,
+                  governance, livelihoods, and social systems to identify
+                  leverage points for change.
+                </p>
+              </div>
+              <div className="approach-card">
+                <i className="fas fa-handshake pillar-icon"></i>
+                <h3>Partnership-Based</h3>
+                <p>
+                  We strengthen local analytical capacity so that impact endures
+                  beyond individual projects, building long-term institutional
+                  capability.
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* ===== FEATURED WORK (experience) ===== */}
-      <div className="section" id="work">
-        <div className="container">
-          <h2>Recent assignments</h2>
-          <p style={{ maxWidth: "70%", marginBottom: "2rem" }}>
-            Selected projects demonstrating our analytical capabilities and
-            regional expertise.
-          </p>
-          <div className="grid-2" style={{ marginTop: "2rem" }}>
-            <div className="work-card" style={{ position: "relative" }}>
-              <div
-                style={{
-                  position: "absolute",
-                  top: "10px",
+        {/* ===== FEATURED WORK (experience) ===== */}
+        <div className="section" id="work">
+          <div className="container">
+            <h2>Recent assignments</h2>
+            <p style={{ maxWidth: "70%", marginBottom: "2rem" }}>
+              Selected projects demonstrating our analytical capabilities and
+              regional expertise.
+            </p>
+            <div className="grid-2" style={{ marginTop: "2rem" }}>
+              <div className="work-card" style={{ position: "relative" }}>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "10px",
 
-                  left: "20px",
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  background: "var(--primary-deep)",
-                  color: "white",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  fontSize: "1.1rem",
-                }}
+                    left: "20px",
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    background: "var(--primary-deep)",
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: "bold",
+                    fontSize: "1.1rem",
+                  }}
+                >
+                  1
+                </div>
+                <div className="client-name" style={{ paddingTop: "2rem" }}>
+                  IRARA{" "}
+                  <span
+                    style={{ fontWeight: 400, color: "var(--text-medium)" }}
+                  >
+                    · ESA Regional
+                  </span>
+                </div>
+                <p className="project-title">
+                  Framework agreement: reach, policy & technical advisory
+                </p>
+                <p className="small-meta">
+                  Ahmed.fagaase@irara.org · +254115783111
+                </p>
+              </div>
+              <div className="work-card" style={{ position: "relative" }}>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    left: "20px",
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    background: "var(--primary-deep)",
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: "bold",
+                    fontSize: "1.1rem",
+                  }}
+                >
+                  2
+                </div>
+                <div className="client-name" style={{ paddingTop: "2rem" }}>
+                  Save the Children International
+                </div>
+                <p className="project-title">
+                  Household Economic Analysis & Anticipatory Action planning
+                </p>
+                <p className="small-meta">
+                  Mohamed Abdi Mohamed · +252907797251
+                </p>
+              </div>
+              <div className="work-card" style={{ position: "relative" }}>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    left: "20px",
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    background: "var(--primary-deep)",
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: "bold",
+                    fontSize: "1.1rem",
+                  }}
+                >
+                  3
+                </div>
+                <div className="client-name" style={{ paddingTop: "2rem" }}>
+                  NADFOR (Somaliland)
+                </div>
+                <p className="project-title">
+                  Workshop: locally funded anticipatory action + organisational
+                  risk register
+                </p>
+                <p className="small-meta">Hassan Mataan · +252634417314</p>
+              </div>
+              <div className="work-card" style={{ position: "relative" }}>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    left: "20px",
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    background: "var(--primary-deep)",
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: "bold",
+                    fontSize: "1.1rem",
+                  }}
+                >
+                  4
+                </div>
+                <div className="client-name" style={{ paddingTop: "2rem" }}>
+                  Danish Refugee Council (DRC)
+                </div>
+                <p className="project-title">
+                  Marketable assessments for vocational training (6 towns,
+                  Somalia)
+                </p>
+                <p className="small-meta">
+                  Simon Nziokah · s.nziokah@drcsomalia.org
+                </p>
+              </div>
+              <div className="work-card" style={{ position: "relative" }}>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    left: "20px",
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    background: "var(--primary-deep)",
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: "bold",
+                    fontSize: "1.1rem",
+                  }}
+                >
+                  5
+                </div>
+                <div className="client-name" style={{ paddingTop: "2rem" }}>
+                  Initiative for Relief and Climate Action (IRCA)
+                </div>
+                <p className="project-title">
+                  5‑year strategy & Program Quality Toolkit
+                </p>
+                <p className="small-meta">Abdullahi Mohamed · 0615111516</p>
+              </div>
+              <div className="work-card" style={{ position: "relative" }}>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    left: "20px",
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    background: "var(--primary-deep)",
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: "bold",
+                    fontSize: "1.1rem",
+                  }}
+                >
+                  6
+                </div>
+                <div className="client-name" style={{ paddingTop: "2rem" }}>
+                  International Rescue Committee
+                </div>
+                <p className="project-title">
+                  Household Economic Analysis (Somalia)
+                </p>
+                <p className="small-meta">Mohamed Abdi Mohamed (SCI)</p>
+              </div>
+            </div>
+            <div style={{ textAlign: "center", marginTop: "2rem" }}>
+              <a
+                href="/projects"
+                className="cta-button"
+                style={{ display: "inline-block" }}
               >
-                1
-              </div>
-              <div className="client-name" style={{ paddingTop: "2rem" }}>
-                IRARA{" "}
-                <span style={{ fontWeight: 400, color: "var(--text-medium)" }}>
-                  · ESA Regional
-                </span>
-              </div>
-              <p className="project-title">
-                Framework agreement: reach, policy & technical advisory
-              </p>
-              <p className="small-meta">
-                Ahmed.fagaase@irara.org · +254115783111
-              </p>
-            </div>
-            <div className="work-card" style={{ position: "relative" }}>
-              <div
-                style={{
-                  position: "absolute",
-                  top: "10px",
-                  left: "20px",
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  background: "var(--primary-deep)",
-                  color: "white",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  fontSize: "1.1rem",
-                }}
-              >
-                2
-              </div>
-              <div className="client-name" style={{ paddingTop: "2rem" }}>
-                Save the Children International
-              </div>
-              <p className="project-title">
-                Household Economic Analysis & Anticipatory Action planning
-              </p>
-              <p className="small-meta">Mohamed Abdi Mohamed · +252907797251</p>
-            </div>
-            <div className="work-card" style={{ position: "relative" }}>
-              <div
-                style={{
-                  position: "absolute",
-                  top: "10px",
-                  left: "20px",
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  background: "var(--primary-deep)",
-                  color: "white",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  fontSize: "1.1rem",
-                }}
-              >
-                3
-              </div>
-              <div className="client-name" style={{ paddingTop: "2rem" }}>
-                NADFOR (Somaliland)
-              </div>
-              <p className="project-title">
-                Workshop: locally funded anticipatory action + organisational
-                risk register
-              </p>
-              <p className="small-meta">Hassan Mataan · +252634417314</p>
-            </div>
-            <div className="work-card" style={{ position: "relative" }}>
-              <div
-                style={{
-                  position: "absolute",
-                  top: "10px",
-                  left: "20px",
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  background: "var(--primary-deep)",
-                  color: "white",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  fontSize: "1.1rem",
-                }}
-              >
-                4
-              </div>
-              <div className="client-name" style={{ paddingTop: "2rem" }}>
-                Danish Refugee Council (DRC)
-              </div>
-              <p className="project-title">
-                Marketable assessments for vocational training (6 towns,
-                Somalia)
-              </p>
-              <p className="small-meta">
-                Simon Nziokah · s.nziokah@drcsomalia.org
-              </p>
-            </div>
-            <div className="work-card" style={{ position: "relative" }}>
-              <div
-                style={{
-                  position: "absolute",
-                  top: "10px",
-                  left: "20px",
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  background: "var(--primary-deep)",
-                  color: "white",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  fontSize: "1.1rem",
-                }}
-              >
-                5
-              </div>
-              <div className="client-name" style={{ paddingTop: "2rem" }}>
-                IRC Action (IRCA)
-              </div>
-              <p className="project-title">
-                5‑year strategy & Program Quality Toolkit
-              </p>
-              <p className="small-meta">Abdullahi Mohamed · 0615111516</p>
-            </div>
-            <div className="work-card" style={{ position: "relative" }}>
-              <div
-                style={{
-                  position: "absolute",
-                  top: "10px",
-                  left: "20px",
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  background: "var(--primary-deep)",
-                  color: "white",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  fontSize: "1.1rem",
-                }}
-              >
-                6
-              </div>
-              <div className="client-name" style={{ paddingTop: "2rem" }}>
-                International Rescue Committee
-              </div>
-              <p className="project-title">
-                Household Economic Analysis (Somalia)
-              </p>
-              <p className="small-meta">Mohamed Abdi Mohamed (SCI)</p>
-            </div>
-          </div>
-          <div style={{ textAlign: "center", marginTop: "2rem" }}>
-            <a
-              href="/projects"
-              className="cta-button"
-              style={{ display: "inline-block" }}
-            >
-              View all projects →
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* ===== INSTITUTIONAL STRUCTURE ===== */}
-      <div className="section">
-        <div className="container">
-          <h2>Institutional Structure</h2>
-          <p style={{ maxWidth: "70%", marginBottom: "2rem" }}>
-            LAAPS operates with a clear governance and management structure to
-            ensure accountability, quality, and integrity.
-          </p>
-          <div className="grid-3">
-            <div className="pillar-card">
-              <i className="fas fa-user-tie pillar-icon"></i>
-              <h3>Executive Director</h3>
-              <p>
-                Strategic leadership and external engagement with partners and
-                stakeholders.
-              </p>
-            </div>
-            <div className="pillar-card">
-              <i className="fas fa-users-cog pillar-icon"></i>
-              <h3>Deputy ED – Programs</h3>
-              <p>
-                Oversight of research and consultancy delivery across all
-                thematic areas.
-              </p>
-            </div>
-            <div className="pillar-card">
-              <i className="fas fa-building pillar-icon"></i>
-              <h3>Deputy ED – Operations</h3>
-              <p>
-                Finance, HR, procurement, compliance, and safeguarding
-                coordination.
-              </p>
+                View all projects →
+              </a>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* ===== STATS / IMPACT ===== */}
-      <div className="section section-bg-light">
-        <div className="container">
-          <h2>Our Impact in Numbers</h2>
-          <div className="grid-4" style={{ textAlign: "center" }}>
-            <div className="stat-card">
-              <div className="stat-number">20+</div>
-              <div className="stat-label">Projects Delivered</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-number">10+</div>
-              <div className="stat-label">Partner Organizations</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-number">3</div>
-              <div className="stat-label">Countries of Operation</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-number">4</div>
-              <div className="stat-label">Research Pillars</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ===== NEWS & UPDATES ===== */}
-      {news.length > 0 && (
+        {/* ===== INSTITUTIONAL STRUCTURE ===== */}
         <div className="section">
           <div className="container">
-            <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-              <h2>Latest News & Updates</h2>
-              <p
-                style={{
-                  maxWidth: "700px",
-                  margin: "0 auto",
-                  color: "#64748b",
-                }}
-              >
-                Stay informed about our latest research findings, events, and
-                announcements
-              </p>
-            </div>
+            <h2>Institutional Structure</h2>
+            <p style={{ maxWidth: "70%", marginBottom: "2rem" }}>
+              LAAPS operates with a clear governance and management structure to
+              ensure accountability, quality, and integrity.
+            </p>
             <div className="grid-3">
-              {news.map((item) => (
-                <Link
-                  key={item.id}
-                  href={`/news/${item.id}`}
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  <div className="news-card">
-                    {item.imageUrl && (
-                      <div className="news-image-wrapper">
-                        <img
-                          src={item.imageUrl}
-                          alt={item.title}
-                          className="news-image"
-                        />
-                      </div>
-                    )}
-                    <div className="news-card-content">
-                      <div className="news-meta">
-                        {item.category && (
-                          <span className="news-category">{item.category}</span>
-                        )}
-                        <span className="news-date">
-                          <i className="fas fa-calendar"></i>{" "}
-                          {formatDate(item.publishDate)}
-                        </span>
-                      </div>
-                      <h3>{item.title}</h3>
-                      {item.excerpt && (
-                        <p className="news-excerpt">{item.excerpt}</p>
-                      )}
-                      {item.author && (
-                        <div className="news-author">
-                          <i className="fas fa-user"></i> {item.author}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-            <div style={{ textAlign: "center", marginTop: "2.5rem" }}>
-              <Link href="/news" className="btn">
-                View All News <i className="fas fa-arrow-right"></i>
-              </Link>
+              <div className="pillar-card">
+                <i className="fas fa-user-tie pillar-icon"></i>
+                <h3>Executive Director</h3>
+                <p>
+                  Strategic leadership and external engagement with partners and
+                  stakeholders.
+                </p>
+              </div>
+              <div className="pillar-card">
+                <i className="fas fa-users-cog pillar-icon"></i>
+                <h3>Deputy ED – Programs</h3>
+                <p>
+                  Oversight of research and consultancy delivery across all
+                  thematic areas.
+                </p>
+              </div>
+              <div className="pillar-card">
+                <i className="fas fa-building pillar-icon"></i>
+                <h3>Deputy ED – Operations</h3>
+                <p>
+                  Finance, HR, procurement, compliance, and safeguarding
+                  coordination.
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      )}
 
-      {/* ===== PUBLICATIONS ===== */}
-      {publications.length > 0 && (
+        {/* ===== STATS / IMPACT ===== */}
         <div className="section section-bg-light">
           <div className="container">
-            <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-              <h2>Recent Publications</h2>
-              <p
-                style={{
-                  maxWidth: "700px",
-                  margin: "0 auto",
-                  color: "#64748b",
-                }}
-              >
-                Explore our latest academic publications and research findings
-              </p>
+            <h2>Our Impact in Numbers</h2>
+            <div className="grid-4" style={{ textAlign: "center" }}>
+              <div className="stat-card">
+                <div className="stat-number">20+</div>
+                <div className="stat-label">Projects Delivered</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-number">10+</div>
+                <div className="stat-label">Partner Organizations</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-number">3</div>
+                <div className="stat-label">Countries of Operation</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-number">4</div>
+                <div className="stat-label">Research Pillars</div>
+              </div>
             </div>
-            <div className="grid-3">
-              {publications.map((item) => (
-                <Link
-                  key={item.id}
-                  href={`/publications/${item.id}`}
-                  style={{ textDecoration: "none", color: "inherit" }}
+          </div>
+        </div>
+
+        {/* ===== NEWS & UPDATES ===== */}
+        {news.length > 0 && (
+          <div className="section">
+            <div className="container">
+              <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+                <h2>Latest News & Updates</h2>
+                <p
+                  style={{
+                    maxWidth: "700px",
+                    margin: "0 auto",
+                    color: "#64748b",
+                  }}
                 >
-                  <div
-                    className="publication-card"
-                    style={{
-                      background: "white",
-                      borderRadius: "16px",
-                      padding: "1.5rem",
-                      boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
-                      transition: "transform 0.3s, box-shadow 0.3s",
-                      cursor: "pointer",
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = "translateY(-5px)";
-                      e.currentTarget.style.boxShadow =
-                        "0 8px 30px rgba(0, 0, 0, 0.15)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = "translateY(0)";
-                      e.currentTarget.style.boxShadow =
-                        "0 4px 20px rgba(0, 0, 0, 0.08)";
-                    }}
+                  Stay informed about our latest research findings, events, and
+                  announcements
+                </p>
+              </div>
+              <div className="grid-3">
+                {news.map((item) => (
+                  <Link
+                    key={item.id}
+                    href={`/news/${item.id}`}
+                    style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <div style={{ marginBottom: "1rem" }}>
-                      <span
-                        style={{
-                          color: "#64748b",
-                          fontSize: "0.85rem",
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "0.3rem",
-                        }}
-                      >
-                        <i className="fas fa-calendar"></i>{" "}
-                        {formatDate(item.publicationDate)}
-                      </span>
+                    <div className="news-card">
+                      {item.imageUrl && (
+                        <div className="news-image-wrapper">
+                          <img
+                            src={item.imageUrl}
+                            alt={item.title}
+                            className="news-image"
+                          />
+                        </div>
+                      )}
+                      <div className="news-card-content">
+                        <div className="news-meta">
+                          {item.category && (
+                            <span className="news-category">
+                              {item.category}
+                            </span>
+                          )}
+                          <span className="news-date">
+                            <i className="fas fa-calendar"></i>{" "}
+                            {formatDate(item.publishDate)}
+                          </span>
+                        </div>
+                        <h3>{item.title}</h3>
+                        {item.excerpt && (
+                          <p className="news-excerpt">{item.excerpt}</p>
+                        )}
+                        {item.author && (
+                          <div className="news-author">
+                            <i className="fas fa-user"></i> {item.author}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                    <h3
+                  </Link>
+                ))}
+              </div>
+              <div style={{ textAlign: "center", marginTop: "2.5rem" }}>
+                <Link href="/news" className="btn">
+                  View All News <i className="fas fa-arrow-right"></i>
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ===== PUBLICATIONS ===== */}
+        {publications.length > 0 && (
+          <div className="section section-bg-light">
+            <div className="container">
+              <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+                <h2>Recent Publications</h2>
+                <p
+                  style={{
+                    maxWidth: "700px",
+                    margin: "0 auto",
+                    color: "#64748b",
+                  }}
+                >
+                  Explore our latest academic publications and research findings
+                </p>
+              </div>
+              <div className="grid-3">
+                {publications.map((item) => (
+                  <Link
+                    key={item.id}
+                    href={`/publications/${item.id}`}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <div
+                      className="publication-card"
                       style={{
-                        fontSize: "1.2rem",
-                        fontWeight: 700,
-                        marginBottom: "0.8rem",
-                        color: "#1e293b",
-                        lineHeight: "1.3",
+                        background: "white",
+                        borderRadius: "16px",
+                        padding: "1.5rem",
+                        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
+                        transition: "transform 0.3s, box-shadow 0.3s",
+                        cursor: "pointer",
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = "translateY(-5px)";
+                        e.currentTarget.style.boxShadow =
+                          "0 8px 30px rgba(0, 0, 0, 0.15)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow =
+                          "0 4px 20px rgba(0, 0, 0, 0.08)";
                       }}
                     >
-                      {item.title}
-                    </h3>
-                    {item.authors && item.authors.length > 0 && (
-                      <p
+                      <div style={{ marginBottom: "1rem" }}>
+                        <span
+                          style={{
+                            color: "#64748b",
+                            fontSize: "0.85rem",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "0.3rem",
+                          }}
+                        >
+                          <i className="fas fa-calendar"></i>{" "}
+                          {formatDate(item.publicationDate)}
+                        </span>
+                      </div>
+                      <h3
                         style={{
-                          color: "#475569",
-                          fontSize: "0.9rem",
+                          fontSize: "1.2rem",
+                          fontWeight: 700,
                           marginBottom: "0.8rem",
-                          fontStyle: "italic",
+                          color: "#1e293b",
+                          lineHeight: "1.3",
                         }}
                       >
-                        {item.authors.join(", ")}
-                      </p>
-                    )}
-                    {item.journal && (
-                      <p
-                        style={{
-                          color: "#0b2e48",
-                          fontSize: "0.9rem",
-                          fontWeight: 600,
-                          marginBottom: "0.8rem",
-                        }}
-                      >
-                        {item.journal}
-                      </p>
-                    )}
-                    {item.abstract && (
-                      <p
-                        style={{
-                          color: "#64748b",
-                          fontSize: "0.9rem",
-                          lineHeight: "1.6",
-                          marginBottom: "1rem",
-                          display: "-webkit-box",
-                          WebkitLineClamp: 3,
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden",
-                        }}
-                      >
-                        {item.abstract}
-                      </p>
-                    )}
-                    <div style={{ marginTop: "auto", paddingTop: "1rem" }}>
-                      <span
-                        style={{
-                          color: "#0b2e48",
-                          fontWeight: 600,
-                          fontSize: "0.9rem",
-                        }}
-                      >
-                        Read More <i className="fas fa-arrow-right"></i>
-                      </span>
+                        {item.title}
+                      </h3>
+                      {item.authors && item.authors.length > 0 && (
+                        <p
+                          style={{
+                            color: "#475569",
+                            fontSize: "0.9rem",
+                            marginBottom: "0.8rem",
+                            fontStyle: "italic",
+                          }}
+                        >
+                          {item.authors.join(", ")}
+                        </p>
+                      )}
+                      {item.journal && (
+                        <p
+                          style={{
+                            color: "#0b2e48",
+                            fontSize: "0.9rem",
+                            fontWeight: 600,
+                            marginBottom: "0.8rem",
+                          }}
+                        >
+                          {item.journal}
+                        </p>
+                      )}
+                      {item.abstract && (
+                        <p
+                          style={{
+                            color: "#64748b",
+                            fontSize: "0.9rem",
+                            lineHeight: "1.6",
+                            marginBottom: "1rem",
+                            display: "-webkit-box",
+                            WebkitLineClamp: 3,
+                            WebkitBoxOrient: "vertical",
+                            overflow: "hidden",
+                          }}
+                        >
+                          {item.abstract}
+                        </p>
+                      )}
+                      <div style={{ marginTop: "auto", paddingTop: "1rem" }}>
+                        <span
+                          style={{
+                            color: "#0b2e48",
+                            fontWeight: 600,
+                            fontSize: "0.9rem",
+                          }}
+                        >
+                          Read More <i className="fas fa-arrow-right"></i>
+                        </span>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
+                ))}
+              </div>
+              <div style={{ textAlign: "center", marginTop: "2.5rem" }}>
+                <Link href="/publications" className="btn">
+                  View All Publications <i className="fas fa-arrow-right"></i>
                 </Link>
-              ))}
-            </div>
-            <div style={{ textAlign: "center", marginTop: "2.5rem" }}>
-              <Link href="/publications" className="btn">
-                View All Publications <i className="fas fa-arrow-right"></i>
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ===== FOOTER ===== */}
-      <footer className="footer" id="contact">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1rem",
-                  marginBottom: "1rem",
-                }}
-              >
-                <img
-                  src="/logo.png"
-                  alt="LAAPS Logo"
-                  style={{
-                    height: "50px",
-                    width: "auto",
-                  }}
-                />
-                <div>
-                  <h3 style={{ color: "white", margin: 0 }}>LAAPS Institute</h3>
-                </div>
-              </div>
-              <p style={{ color: "#b9c6cc" }}>
-                Institute of Applied Analysis for Practical Solutions
-              </p>
-              <p
-                style={{
-                  color: "#b9c6cc",
-                  fontSize: "0.9rem",
-                  marginTop: "1rem",
-                }}
-              >
-                Advancing research for real-world solutions in the Horn of
-                Africa.
-              </p>
-              <div
-                style={{
-                  margin: "1rem 0",
-                  color: "#b9c6cc",
-                  fontSize: "1.5rem",
-                }}
-              >
-                <i
-                  className="fab fa-linkedin"
-                  style={{ marginRight: "1rem", cursor: "pointer" }}
-                ></i>
-                <i className="fab fa-twitter" style={{ cursor: "pointer" }}></i>
               </div>
             </div>
-            <div>
-              <p style={{ fontWeight: 600, color: "white" }}>Quick links</p>
-              <ul style={{ listStyle: "none", color: "#b9c6cc" }}>
-                <li>
-                  <a href="#research">Research</a>
-                </li>
-                <li>
-                  <a href="#advisory">Consultancy</a>
-                </li>
-                <li>
-                  <a href="#approach">Our Approach</a>
-                </li>
-                <li>
-                  <a href="#work">Work</a>
-                </li>
-                <li>
-                  <a href="#contact">Contact</a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <p style={{ fontWeight: 600, color: "white" }}>Contact</p>
-              <p style={{ color: "#b9c6cc" }}>
-                <i
-                  className="fas fa-envelope"
-                  style={{ marginRight: "0.5rem" }}
-                ></i>
-                general@laaps.institute
-                <br />
-                <i
-                  className="fas fa-phone"
-                  style={{ marginRight: "0.5rem" }}
-                ></i>
-                +254 115 783 111 (Nairobi)
-                <br />
-                <i
-                  className="fas fa-map-marker-alt"
-                  style={{ marginRight: "0.5rem" }}
-                ></i>
-                Hargeisa · Mogadishu · Garowe
-              </p>
-            </div>
           </div>
-          <hr />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              color: "#b9c6cc",
-              fontSize: "0.8rem",
-              flexWrap: "wrap",
-              gap: "1rem",
-            }}
-          >
-            <span>© 2025 LAAPS Institute – all rights reserved</span>
-            <span>Privacy policy · Terms · Safeguarding</span>
-          </div>
-        </div>
-      </footer>
+        )}
+      </div>
     </div>
   );
 }
