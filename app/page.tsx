@@ -143,7 +143,7 @@ export default function Page() {
           className="container home-hero-layout"
           style={{
             display: "flex",
-            alignItems: "center",
+            alignItems: "flex-start",
             gap: "4rem",
             padding: "4rem 2.5rem",
             minHeight: "500px",
@@ -176,10 +176,11 @@ export default function Page() {
                 fontWeight: 700,
               }}
             >
-              Advancing research for
-              <br />
+              <span className="home-hero-title-line">
+                Advancing research for
+              </span>
               <span
-                className="home-hero-typed"
+                className="home-hero-typed home-hero-title-accent"
                 style={{
                   background:
                     "linear-gradient(135deg, var(--primary-deep), var(--secondary-earth))",
@@ -226,6 +227,20 @@ export default function Page() {
               working across the Horn of Africa. We turn complex evidence into
               practical, sustainable solutions for fragile contexts.
             </p>
+            <div className="home-hero-metrics">
+              <div className="home-hero-metric-card">
+                <strong>Research-led</strong>
+                <span>decision support</span>
+              </div>
+              <div className="home-hero-metric-card">
+                <strong>Horn of Africa</strong>
+                <span>deep contextual focus</span>
+              </div>
+              <div className="home-hero-metric-card">
+                <strong>Evidence to action</strong>
+                <span>policy, programmes, investment</span>
+              </div>
+            </div>
             <div
               className="home-hero-actions"
               style={{
@@ -285,6 +300,7 @@ export default function Page() {
               transition: "transform 0.3s ease, box-shadow 0.3s ease",
             }}
           >
+            <div className="home-hero-media-accent"></div>
             <div
               className="home-hero-media-inner"
               style={{ textAlign: "center" }}
@@ -311,6 +327,13 @@ export default function Page() {
                   }}
                 />
               </div>
+            </div>
+            <div className="home-hero-floating-card">
+              <span className="home-hero-floating-label">What we do</span>
+              <p>
+                Applied research, advisory design, MEAL, and institutional
+                learning for fragile and fast-changing contexts.
+              </p>
             </div>
           </div>
         </div>
